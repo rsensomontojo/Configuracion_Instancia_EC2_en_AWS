@@ -91,109 +91,99 @@ netstat -ntl
 - Configuración de contenedores
 - Despliegue de aplicaciones
 
-Notas de clase:
-Carpeta AWS-2DAW (donde quieras)
-buscar
-ec2 y darle a la estrella
+--
+#Notas de clase:
+# AWS EC2 Setup Guide
 
-dos pestañas
+## Preparación Inicial
+- Crear carpeta AWS-2DAW
+- Buscar servicio EC2
+- Marcar EC2 con estrella
+- Abrir dos pestañas (consola y laboratorio)
 
-consola como dashboard (como ir al dashboard?)
-y el laboratorio
+## Conexión Criptográfica
+- Ir a laboratorio
+- AWS Details
+- Descargar archivo PEM
+- Mover archivo a carpeta AWS-2DAW
 
-conectar criptografia publica y privada
-en el laboratorio->
-AWS details->
-download PEM->
-mueves el archivo en la carpeta de AWS-2DAW->
-lanzar terminal->(boton derecho, abrir terminal)
-ll para ver permisos
+## Configuración Terminal
+```bash
+# Abrir terminal (botón derecho)
+ll  # Ver permisos iniciales: -rw-r--r--
 
--rw-r--r--
-cambiamos permisos
+# Cambiar permisos
 chmod 400 labuser.pem
-ll para comprobar
 
+ll  # Comprobar permisos
+```
 
-vuelvo al dashboard
-ec2
-panel izquierdo->instancias (vacio)
+## Lanzar Instancia EC2
+### Configuración
+- Nombre: Identificativo
+- AMI: Amazon Linux 2023 Free
+- Arquitectura: 64bit x86
+- Instancia: t2.micro (1CPU, 1GB RAM)
+- Key Pair: vockey
+- Network: 
+  - Auto-assign Public IP: ENABLE
+- Firewall: Allow SSH traffic from anywhere
+- Almacenamiento: 8 GB GP3
 
-vpc icono(redes privadas virtuales)
+### Pasos
+1. Lanzar instancia
+2. Esperar barra verde SUCCESS
+3. Refrescar consola
+4. Seleccionar instancias
+5. Ver detalles
+6. Copiar IP v4 pública
 
-Como levantar una maquina:
-(lanzar una instancia)
+## Conexión SSH
+```bash
+ssh -i labuser.pem ec2-user@[IP_PUBLICA]
+# Aceptar fingerprint (yes)
+```
 
-lanzar instancia->
-nombre identificativo
-amis(imágenes, plantillas para crear maqunas a partir de ellas)->
-amazonLinux 2023 free
-arquitectura->
-64bit x86
-tipo de instancia->
-t2 micro (free) 1CPU 1GB RAM
-key pair->
-vockey
-network settings->
-como está
-auto asing public IP -> ENABLE
-Firewall(segurity group)->
-allow ssh traffict from …………………anywhere
-confirgure storage->
-8 gp3
+## Configuración Windows
+1. Propiedades archivo .pem
+2. Seguridad
+3. Opciones avanzadas
+   - Deshabilitar herencia
+   - Opciones explícitas
+4. Quitar permisos a:
+   - System
+   - Administradores
 
-LANZAR INSTACIA : BARRA EN VERDE SUCCESS
-
-Pulsar instancias
-no se ve, refresca en la consola :)
-(innizializando)
-al pinchar-> details
-ip v4 publica (la copias)(publica)
-me voy al terminal de antes, con una conexión ssh -i labuser.pem ec2-user(usuario)@107.22.88.187( la ip v4 que copiaste)
-INTRO
-fingerprint yes
-
-y ya estaria conectado
------------------------
-Errores en Windows 
-propiedades del archivo.pem
-seguridad
-
-opciones avanxadas-> dehabilitar herencia-> opción explicitos-> aceptar
-ahora dejarlo solo a mi usuario
-editar 
-system fuera
-administradores fuera
------------------------
-
-
-Una vez conectado:
-
+## Configuración Servidor Web
+```bash
+# Instalar Apache
 sudo yum install hhtpd
-intro
-yes
-netstat -ntl
-puertos: 22 
+# Confirmar con 'yes'
+
+# Verificar puertos
+netstat -ntl  # Debe mostrar puerto 22
+
+# Iniciar servicio
 sudo systemctl start httpd
-intro
+
+# Verificar puerto 80
 netstat -ntl
-puerto:80
+```
 
-consola de aws, selecciono la maquina->
-segurity
-reglas de entrada (inbound rules)
-agregar regla->edit 
-add rule
-select http
-lupa 0000/0
-save
+## Configuración Seguridad AWS
+1. Seleccionar máquina
+2. Ir a Seguridad
+3. Reglas de entrada (Inbound Rules)
+4. Agregar regla
+   - Seleccionar HTTP
+   - Origen: 0.0.0.0/0
+5. Guardar
 
-pegas en el browser la dirección ip y te tiene qu funcionar
+## Verificación
+- Abrir navegador
+- Pegar dirección IP pública
 
-
-eliminar la maquina para practicar el próximo día
-crear una nueva el próximo día y levantar docker
-
-
-
-  
+## Notas Finales
+- Eliminar máquina al finalizar práctica
+- Próximo día: Crear nueva instancia
+- Siguiente paso: Levantar Docker
