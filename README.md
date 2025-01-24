@@ -90,3 +90,110 @@ netstat -ntl
 - Instalación de Docker
 - Configuración de contenedores
 - Despliegue de aplicaciones
+
+Notas de clase:
+Carpeta AWS-2DAW (donde quieras)
+buscar
+ec2 y darle a la estrella
+
+dos pestañas
+
+consola como dashboard (como ir al dashboard?)
+y el laboratorio
+
+conectar criptografia publica y privada
+en el laboratorio->
+AWS details->
+download PEM->
+mueves el archivo en la carpeta de AWS-2DAW->
+lanzar terminal->(boton derecho, abrir terminal)
+ll para ver permisos
+
+-rw-r--r--
+cambiamos permisos
+chmod 400 labuser.pem
+ll para comprobar
+
+
+vuelvo al dashboard
+ec2
+panel izquierdo->instancias (vacio)
+
+vpc icono(redes privadas virtuales)
+
+Como levantar una maquina:
+(lanzar una instancia)
+
+lanzar instancia->
+nombre identificativo
+amis(imágenes, plantillas para crear maqunas a partir de ellas)->
+amazonLinux 2023 free
+arquitectura->
+64bit x86
+tipo de instancia->
+t2 micro (free) 1CPU 1GB RAM
+key pair->
+vockey
+network settings->
+como está
+auto asing public IP -> ENABLE
+Firewall(segurity group)->
+allow ssh traffict from …………………anywhere
+confirgure storage->
+8 gp3
+
+LANZAR INSTACIA : BARRA EN VERDE SUCCESS
+
+Pulsar instancias
+no se ve, refresca en la consola :)
+(innizializando)
+al pinchar-> details
+ip v4 publica (la copias)(publica)
+me voy al terminal de antes, con una conexión ssh -i labuser.pem ec2-user(usuario)@107.22.88.187( la ip v4 que copiaste)
+INTRO
+fingerprint yes
+
+y ya estaria conectado
+-----------------------
+Errores en Windows 
+propiedades del archivo.pem
+seguridad
+
+opciones avanxadas-> dehabilitar herencia-> opción explicitos-> aceptar
+ahora dejarlo solo a mi usuario
+editar 
+system fuera
+administradores fuera
+-----------------------
+
+
+Una vez conectado:
+
+sudo yum install hhtpd
+intro
+yes
+netstat -ntl
+puertos: 22 
+sudo systemctl start httpd
+intro
+netstat -ntl
+puerto:80
+
+consola de aws, selecciono la maquina->
+segurity
+reglas de entrada (inbound rules)
+agregar regla->edit 
+add rule
+select http
+lupa 0000/0
+save
+
+pegas en el browser la dirección ip y te tiene qu funcionar
+
+
+eliminar la maquina para practicar el próximo día
+crear una nueva el próximo día y levantar docker
+
+
+
+  
