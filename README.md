@@ -90,9 +90,10 @@ netstat -ntl
 - Instalación de Docker
 - Configuración de contenedores
 - Despliegue de aplicaciones
-
---
-#Notas de clase:
+----
+----
+# Notas de clase:
+----
 # AWS EC2 Setup Guide
 
 ## Preparación Inicial
