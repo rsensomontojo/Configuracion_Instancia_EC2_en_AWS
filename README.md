@@ -100,7 +100,7 @@ netstat -ntl
 - Crear carpeta AWS-2DAW
 - Buscar servicio EC2
 - Marcar EC2 con estrella
-- Abrir dos pestañas (consola y laboratorio)
+- Abrir dos pestañas (dashboard y laboratorio)
 
 ## Conexión Criptográfica
 - Ir a laboratorio
